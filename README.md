@@ -81,15 +81,15 @@ Notebooks in notebooks/ refer to that file via a relative path.
 
 We minimize total cost over all time steps \(t \in T\), including grid import/export, LCOS, and battery capacity-expansion:
 
-\[
-\min \; 
-\sum_{t\in T}\Bigl(
-  p^{\text{buy}}_t\,(grid2load_t + grid2batt_t)
+```latex
+$$
+\min \;\sum_{t\in T}\Bigl[
+  p^{\mathrm{buy}}_t\,(grid2load_t + grid2batt_t)
   \;-\;
-  p^{\text{sell}}_t\,(pv2grid_t + batt2grid_t)
+  p^{\mathrm{sell}}_t\,(pv2grid_t + batt2grid_t)
   \;+\;
-  \text{lcos}_t\,(batt2load_t + batt2grid_t)
-\Bigr)
+  \mathrm{lcos}_t\,(batt2load_t + batt2grid_t)
+\Bigr]
 \;+\;
-\text{CAP\_COST}\,\delta_{\text{cap}}
-\]
+\mathrm{CAP\_COST}\,\delta_{\mathrm{cap}}
+$$
