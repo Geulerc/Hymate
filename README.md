@@ -5,10 +5,16 @@ This repository contains an hourly energy‐dispatch model (PV, battery, grid) b
 
 ## Project Structure
 ├── tech_tasks/ ← input Excel file(s)
-├── notebooks/ ← Jupyter notebook with model & analysis
+
+├── notebooks/ ← Jupyter notebook with models
+
+
 ├── Solutions/ ← output Excel & plot images
+
 ├── requirements.txt ← Python dependencies
+
 ├── .gitignore
+
 └── README.md
 
 
@@ -54,7 +60,7 @@ Notebooks in notebooks/ refer to that file via a relative path.
 
 - soc: state of charge (0 … B_CAP).
 
-b- uy_indicator: binary, enforces no simultaneous buy & sell.
+- b- uy_indicator: binary, enforces no simultaneous buy & sell.
 
 
 ## Key Constraints
@@ -69,5 +75,21 @@ b- uy_indicator: binary, enforces no simultaneous buy & sell.
 
 - SoC dynamics: SoCₜ = SoCₜ₋₁ + η·charge − discharge.
 
-- Mutual exclusivity: buy_indicator prevents simultaneous import & export.
+- Mutual exclusivity: buy_indicator prevents simultaneous import & export. (Optional B)
 
+## Objective Function
+
+We minimize total cost over all time steps \(t \in T\), including grid import/export, LCOS, and battery capacity-expansion:
+
+\[
+\min \; 
+\sum_{t\in T}\Bigl(
+  p^{\text{buy}}_t\,(grid2load_t + grid2batt_t)
+  \;-\;
+  p^{\text{sell}}_t\,(pv2grid_t + batt2grid_t)
+  \;+\;
+  \text{lcos}_t\,(batt2load_t + batt2grid_t)
+\Bigr)
+\;+\;
+\text{CAP\_COST}\,\delta_{\text{cap}}
+\]
