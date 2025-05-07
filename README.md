@@ -8,6 +8,7 @@ This repository contains an hourly energy‐dispatch model (PV, battery, grid) b
 
 ├── notebooks/ ← Jupyter notebook with models
 
+├── docs/ ← Model assumptions, formulation and notes
 
 ├── Solutions/ ← output Excel & plot images
 
@@ -69,7 +70,8 @@ Notebooks in notebooks/ refer to that file via a relative path.
 
 - Load balance: supply exactly meets demand each interval.
 
-- Grid limits: import & export ≤ G_CAP.
+- Grid limits: import ≤ G_CAP.
+               export ≤ G_CAP.
 
 - Battery power: charge/discharge rates ≤ B_RATE.
 
