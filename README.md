@@ -85,8 +85,9 @@ Minimize total cost over all time steps `t ∈ T`:
 
 minimize 
 
-∑_{t∈T} 
-   sum( m.p_buy[t]  * m.grid2load[t]  #cost of energy drawn from grid to load
+      ∑_{t∈T} 
+
+      sum( m.p_buy[t]  * m.grid2load[t]  #cost of energy drawn from grid to load
 
        + m.p_buy[t]  * m.grid2batt[t]  #cost of energy drawn from grid to battery
 
