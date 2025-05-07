@@ -83,12 +83,9 @@ We minimize total cost over all time steps \(t \in T\), including grid import/ex
 
 Minimize total cost over all time steps `t ∈ T`:
 
-minimize ∑_{t∈T} [
-p_buy[t] * (grid2load[t] + grid2batt[t])
-
-p_sell[t] * (pv2grid[t] + batt2grid[t])
-
-lcos[t] * (batt2load[t] + batt2grid[t])
-]
-
-CAP_COST * δ_cap
+minimize ∑_{t∈T} sum(
+         m.p_buy[t]  * m.grid2load[t]    # cost of energy drawn from grid to load
+       + m.p_buy[t]  * m.grid2batt[t]    # cost of energy drawn from grid to battery
+       - m.p_sell[t] * m.pv2grid[t]      # revenue from PV exported to grid
+       - m.p_sell[t] * m.batt2grid[t]    # revenue from battery exports
+       + m.lcos[t]   * (m.batt2load[t] + m.batt2grid[t])  # LCOS cost per kWh discharged
